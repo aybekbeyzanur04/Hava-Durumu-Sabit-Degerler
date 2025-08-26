@@ -1,4 +1,113 @@
 <!DOCTYPE html>
-<html>
-Merhaba
-</hmtl>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Türkiye Hava Durumu</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #e0f0ff;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      max-width: 900px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      width: 100%;
+    }
+    .city-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .city-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    .city-name {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #0077cc;
+    }
+    .temp {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+      color: #ff6600;
+    }
+    .desc {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: #555;
+      text-transform: capitalize;
+    }
+    .weather-icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="weatherContainer"></div>
+
+  <script>
+    // Sabit hava durumu verileri (Türkiye'den 5 şehir)
+    const weatherData = [
+      {
+        city: "İstanbul",
+        temp: 22,
+        description: "parçalı bulutlu",
+        icon: "https://openweathermap.org/img/wn/03d@2x.png"
+      },
+      {
+        city: "Ankara",
+        temp: 18,
+        description: "hafif yağmur",
+        icon: "https://openweathermap.org/img/wn/10d@2x.png"
+      },
+      {
+        city: "İzmir",
+        temp: 25,
+        description: "güneşli",
+        icon: "https://openweathermap.org/img/wn/01d@2x.png"
+      },
+      {
+        city: "Antalya",
+        temp: 28,
+        description: "az bulutlu",
+        icon: "https://openweathermap.org/img/wn/02d@2x.png"
+      },
+      {
+        city: "Trabzon",
+        temp: 19,
+        description: "sisli",
+        icon: "https://openweathermap.org/img/wn/50d@2x.png"
+      }
+    ];
+
+    const container = document.getElementById("weatherContainer");
+
+    weatherData.forEach(data => {
+      const card = document.createElement("div");
+      card.className = "city-card";
+
+      card.innerHTML = `
+        <div class="city-name">${data.city}</div>
+        <img src="${data.icon}" alt="${data.description}" class="weather-icon" />
+        <div class="temp">${data.temp}°C</div>
+        <div class="desc">${data.description}</div>
+      `;
+
+      container.appendChild(card);
+    });
+  </script>
+</body>
+</html>
